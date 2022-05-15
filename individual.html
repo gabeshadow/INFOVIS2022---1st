@@ -1,0 +1,386 @@
+<html>
+<head>
+    <title>INFOVIS Project</title>
+    <meta content="teetat/html;charset=utf-8" http-equiv="Content-Tredditope">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <h1>INFOVIS - PROGETTO INDIVIDUALE</h1>
+    <h2> Facendo click con il pulsante sinistro su una caratteristica di un albero, tutti gli alberi si dispongono in orizzontale in base alla variabile associata alla caratteristica cliccata. </h2>
+    <ul style="font-size:x-large">
+        <li> Chioma - Reddito </li>
+        <li> Frutti - Produttività lavorativa </li>
+        <li> Tronco - Età </li>
+        <li> Radici - Figli </li>
+    </ul>
+    <svg width="2500" height="500">
+        <rect id="A_tronco" x="0" y="0" width="0" height="0" stroke="black" stroke-width="3" fill="brown" />
+        <rect id="B_tronco" x="0" y="0" width="0" height="0" stroke="black" stroke-width="3" fill="brown" />
+        <rect id="C_tronco" x="0" y="0" width="0" height="0" stroke="black" stroke-width="3" fill="brown" />
+        <rect id="D_tronco" x="0" y="0" width="0" height="0" stroke="black" stroke-width="3" fill="brown" />
+        <rect id="E_tronco" x="0" y="0" width="0" height="0" stroke="black" stroke-width="3" fill="brown" />
+        <rect id="F_tronco" x="0" y="0" width="0" height="0" stroke="black" stroke-width="3" fill="brown" />
+        <rect id="G_tronco" x="0" y="0" width="0" height="0" stroke="black" stroke-width="3" fill="brown" />
+        <rect id="H_tronco" x="0" y="0" width="0" height="0" stroke="black" stroke-width="3" fill="brown" />
+        <rect id="I_tronco" x="0" y="0" width="0" height="0" stroke="black" stroke-width="3" fill="brown" />
+        <rect id="J_tronco" x="0" y="0" width="0" height="0" stroke="black" stroke-width="3" fill="brown" />
+        <circle id="A_chioma" cx="0" cy="0" r="0" stroke="black" stroke-width="5" fill="green" />
+        <circle id="B_chioma" cx="0" cy="0" r="0" stroke="black" stroke-width="5" fill="green" />
+        <circle id="C_chioma" cx="0" cy="0" r="0" stroke="black" stroke-width="5" fill="green" />
+        <circle id="D_chioma" cx="0" cy="0" r="0" stroke="black" stroke-width="5" fill="green" />
+        <circle id="E_chioma" cx="0" cy="0" r="0" stroke="black" stroke-width="5" fill="green" />
+        <circle id="F_chioma" cx="0" cy="0" r="0" stroke="black" stroke-width="5" fill="green" />
+        <circle id="G_chioma" cx="0" cy="0" r="0" stroke="black" stroke-width="5" fill="green" />
+        <circle id="H_chioma" cx="0" cy="0" r="0" stroke="black" stroke-width="5" fill="green" />
+        <circle id="I_chioma" cx="0" cy="0" r="0" stroke="black" stroke-width="5" fill="green" />
+        <circle id="J_chioma" cx="0" cy="0" r="0" stroke="black" stroke-width="5" fill="green" />
+        <circle id="A_frutto_1" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="A_frutto_2" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="A_frutto_3" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="B_frutto_1" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="B_frutto_2" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="B_frutto_3" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="C_frutto_1" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="C_frutto_2" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="C_frutto_3" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="D_frutto_1" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="D_frutto_2" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="D_frutto_3" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="E_frutto_1" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="E_frutto_2" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="E_frutto_3" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="F_frutto_1" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="F_frutto_2" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="F_frutto_3" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="G_frutto_1" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="G_frutto_2" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="G_frutto_3" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="H_frutto_1" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="H_frutto_2" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="H_frutto_3" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="I_frutto_1" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="I_frutto_2" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="I_frutto_3" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="J_frutto_1" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="J_frutto_2" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <circle id="J_frutto_3" cx="0" cy="0" r="0" stroke="black" stroke-width="3" fill="red" />
+        <line id="A_radice_1" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="A_radice_2" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="A_radice_3" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="B_radice_1" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="B_radice_2" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="B_radice_3" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="C_radice_1" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="C_radice_2" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="C_radice_3" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="D_radice_1" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="D_radice_2" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="D_radice_3" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="E_radice_1" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="E_radice_2" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="E_radice_3" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="F_radice_1" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="F_radice_2" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="F_radice_3" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="G_radice_1" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="G_radice_2" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="G_radice_3" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="H_radice_1" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="H_radice_2" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="H_radice_3" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="I_radice_1" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="I_radice_2" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="I_radice_3" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="J_radice_1" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="J_radice_2" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <line id="J_radice_3" x1="0" x2="0" y1="0" y2="0" stroke="black" fill="transparent" />
+        <rect id="disableAll" x="0" y="0" width="0" height="0" stroke="black" fill="black" stroke-width="0" fill-opacity="0" />
+    </svg>
+
+    <script></script>
+
+    <script>
+        var destinazioni = {};
+        var passi = {};
+
+        // eta = tronchi
+        // reddito = chiome
+        // figli = radici
+        // produttivita = frutti
+
+        dataSet = [
+            {
+                "eta": 25,
+                "reddito": 1200,
+                "produttivita": 3,
+                "figli": 2,
+                "origine": 0,
+                "rif": "A"
+            },
+            {
+                "eta": 30,
+                "reddito": 1000,
+                "produttivita": 4,
+                "figli": 3,
+                "origine": 0,
+                "rif": "B"
+            },
+            {
+                "eta": 10,
+                "reddito": 0,
+                "produttivita": 0,
+                "figli": 0,
+                "origine": 0,
+                "rif": "C"
+            },
+            {
+                "eta": 90,
+                "reddito": 2000,
+                "produttivita": 0,
+                "figli": 2,
+                "origine": 0,
+                "rif": "D"
+            },
+            {
+                "eta": 50,
+                "reddito": 2200,
+                "produttivita": 1,
+                "figli": 1,
+                "origine": 0,
+                "rif": "E"
+            },
+            {
+                "eta": 30,
+                "reddito": 1700,
+                "produttivita": 3,
+                "figli": 0,
+                "origine": 0,
+                "rif": "F"
+            },
+            {
+                "eta": 45,
+                "reddito": 700,
+                "produttivita": 0,
+                "figli": 0,
+                "origine": 0,
+                "rif": "G"
+            },
+            {
+                "eta": 85,
+                "reddito": 200,
+                "produttivita": 0,
+                "figli": 4,
+                "origine": 0,
+                "rif": "H"
+            },
+            {
+                "eta": 18,
+                "reddito": 500,
+                "produttivita": 4,
+                "figli": 0,
+                "origine": 0,
+                "rif": "I"
+            },
+            {
+                "eta": 40,
+                "reddito": 3000,
+                "produttivita": 0,
+                "figli": 4,
+                "origine": 0,
+                "rif": "J"
+            }
+        ];
+
+
+
+        var scale_centroid = d3.scaleLinear();
+        scale_centroid.domain([1, dataSet.length]);
+        scale_centroid.range([150, 150 + (200 * 9)]);
+        var scale_eta = d3.scaleLinear();
+        scale_eta.domain([d3.min(dataSet, d => d.eta), d3.max(dataSet, d => d.eta)]);
+        scale_eta.range([0.55, 1]);
+        var scale_reddito = d3.scaleLinear();
+        scale_reddito.domain([d3.min(dataSet, d => d.reddito), d3.max(dataSet, d => d.reddito)]);
+        scale_reddito.range([0.55, 1]);
+        var scale_figli = d3.scaleLinear();
+        scale_figli.domain([d3.min(dataSet, d => d.figli), d3.max(dataSet, d => d.figli)]); // 1 a 10, 0 a 0.45
+        scale_figli.range([0, 0.45]);
+        var scale_produttivita = d3.scaleLinear();
+        scale_produttivita.domain([d3.min(dataSet, d => d.produttivita), d3.max(dataSet, d => d.produttivita)]);
+        scale_produttivita.range([0.55, 1]);
+        // disegno radici
+        Object.keys(dataSet).forEach(function (key) {
+            var value_figli = dataSet[key].figli;
+            var line1 = document.getElementById(dataSet[key].rif + "_radice_1");
+            var line2 = document.getElementById(dataSet[key].rif + "_radice_2");
+            var line3 = document.getElementById(dataSet[key].rif + "_radice_3");
+            var y1 = 450;
+            var y2 = 500;
+            var x1 = key * 200 + 150;
+            var scale_radice = scale_figli(value_figli);
+            line1.setAttribute("x1", x1);
+            line1.setAttribute("y1", y1);
+            line1.setAttribute("x2", x1 - 50);
+            line1.setAttribute("y2", y2);
+            line1.setAttribute("stroke-width", Math.round(scale_radice * 8));
+            line2.setAttribute("x1", x1);
+            line2.setAttribute("y1", y1);
+            line2.setAttribute("x2", x1);
+            line2.setAttribute("y2", y2);
+            line2.setAttribute("stroke-width", Math.round(scale_radice * 8));
+            line3.setAttribute("x1", x1);
+            line3.setAttribute("y1", y1);
+            line3.setAttribute("x2", x1 + 50);
+            line3.setAttribute("y2", y2);
+            line3.setAttribute("stroke-width", Math.round(scale_radice * 8));
+        });
+        // disegno tronchi
+        Object.keys(dataSet).forEach(function (key) {
+            var value_eta = dataSet[key].eta;
+            var x = key * 200 + 140;
+            var rect = document.getElementById(dataSet[key].rif + "_tronco");
+            var scale_tronco = scale_eta(value_eta);
+            rect.setAttribute("x", x);
+            rect.setAttribute("y", Math.round(450 - (scale_tronco * 200)));
+            rect.setAttribute("width", 20);
+            rect.setAttribute("height", Math.round(scale_tronco * 200));
+        });
+        // disegno chiome
+        Object.keys(dataSet).forEach(function (key) {
+            var value_reddito = dataSet[key].reddito;
+            var circle = document.getElementById(dataSet[key].rif + "_chioma");
+            var scale_chioma = scale_reddito(value_reddito);
+            var cx = key * 200 + 150;
+            var altezza_tronco = document.getElementById(dataSet[key].rif + "_tronco");
+            circle.setAttribute("cx", cx);
+            circle.setAttribute("cy", altezza_tronco.getAttribute("y") - scale_chioma * 90);
+            circle.setAttribute("r", Math.ceil(scale_chioma * 90));
+        });
+        // disegno frutti
+        Object.keys(dataSet).forEach(function (key) {
+            var value_produttivita = dataSet[key].produttivita;
+            var circle1 = document.getElementById(dataSet[key].rif + "_frutto_1");
+            var circle2 = document.getElementById(dataSet[key].rif + "_frutto_2");
+            var circle3 = document.getElementById(dataSet[key].rif + "_frutto_3");
+            var chioma = document.getElementById(dataSet[key].rif + "_chioma");
+            var cx = parseInt(chioma.getAttribute("cx"));
+            var cy = parseInt(chioma.getAttribute("cy"));
+            var r = parseInt(chioma.getAttribute("r"));
+            var scale_frutto = scale_produttivita(value_produttivita);
+            var r_frutto = Math.ceil(scale_frutto * 30);
+            circle1.setAttribute("cx", Math.round(cx - r * (Math.sin(45)) + r_frutto * (Math.sin(45)) + 10));
+            circle1.setAttribute("cy", Math.round(cy - r * (Math.sin(45)) + r_frutto * (Math.sin(45)) + 10));
+            circle1.setAttribute("r", r_frutto);
+            circle2.setAttribute("cx", Math.round(cx + r * (Math.sin(45)) - r_frutto * (Math.sin(45)) - 10));
+            circle2.setAttribute("cy", Math.round(cy - r * (Math.sin(45)) + r_frutto * (Math.sin(45)) + 10));
+            circle2.setAttribute("r", r_frutto);
+            circle3.setAttribute("cx", cx);
+            circle3.setAttribute("cy", cy + r - r_frutto - 10);
+            circle3.setAttribute("r", r_frutto);
+        });
+
+        function trasla(order) {
+            // definizione origini
+            Object.keys(dataSet).forEach(function (key) {
+                dataSet[key].origine = key;
+            });
+            // ordinamento
+            if (order == 1) {
+                dataSet.sort(function (x, y) {
+                    return d3.ascending(x.eta, y.eta);
+                });
+            } else if (order == 2) { // 2 == REDDITO == CHIOME
+                dataSet.sort(function (x, y) {
+                    return d3.ascending(x.reddito, y.reddito);
+                });
+            } else if (order == 3) {
+                dataSet.sort(function (x, y) {
+                    return d3.ascending(x.produttivita, y.produttivita);
+                });
+            } else {
+                dataSet.sort(function (x, y) {
+                    return d3.ascending(x.figli, y.figli);
+                });
+            }
+            Object.keys(dataSet).forEach(function (key) {
+                var albero = dataSet[key].rif;
+                var z = parseInt(document.getElementById(albero + "_radice_1").getAttribute("x1"));
+            });
+            Object.keys(dataSet).forEach(function (key) {
+                var partenza_k = parseInt(dataSet[key].origine);
+                var arrivo_k = parseInt(key);
+                var spostamento = arrivo_k - partenza_k;
+                var tipo_passo = 0;
+                if (spostamento > 0) tipo_passo = 2;
+                else if (spostamento < 0) tipo_passo = -2;
+                passi[key] = tipo_passo;
+                var partenza_px = parseInt(document.getElementById(dataSet[key].rif + "_radice_1").getAttribute("x1"))
+                var arrivo_px = partenza_px + 200 * spostamento;
+                destinazioni[key] = arrivo_px;
+            });
+            var interval_trasla = setInterval(function () {
+                var endOfInterval = 0;
+                Object.keys(dataSet).forEach(function (key) {
+                    var albero = dataSet[key].rif;
+                    var z = parseInt(document.getElementById(albero + "_radice_1").getAttribute("x1"));
+                    if (z != destinazioni[key]) {
+                        endOfInterval++;
+                        document.getElementById("disableAll").setAttribute("width", 2500);
+                        document.getElementById("disableAll").setAttribute("heigth", 500);
+
+                        document.getElementById(albero + "_radice_1").setAttribute("x1", z + passi[key]);
+                        document.getElementById(albero + "_radice_2").setAttribute("x1", z + passi[key]);
+                        document.getElementById(albero + "_radice_3").setAttribute("x1", z + passi[key]);
+                        document.getElementById(albero + "_radice_1").setAttribute("x2", z + passi[key] - 50);
+                        document.getElementById(albero + "_radice_2").setAttribute("x2", z + passi[key]);
+                        document.getElementById(albero + "_radice_3").setAttribute("x2", z + passi[key] + 50);
+                        z = parseInt(document.getElementById(albero + "_tronco").getAttribute("x"));
+                        document.getElementById(albero + "_tronco").setAttribute("x", z + passi[key]);
+                        z = parseInt(document.getElementById(albero + "_chioma").getAttribute("cx"));
+                        document.getElementById(albero + "_chioma").setAttribute("cx", z + passi[key]);
+                        z = parseInt(document.getElementById(albero + "_frutto_1").getAttribute("cx"));
+                        document.getElementById(albero + "_frutto_1").setAttribute("cx", z + passi[key]);
+                        z = parseInt(document.getElementById(albero + "_frutto_2").getAttribute("cx"));
+                        document.getElementById(albero + "_frutto_2").setAttribute("cx", z + passi[key]);
+                        z = parseInt(document.getElementById(albero + "_frutto_3").getAttribute("cx"));
+                        document.getElementById(albero + "_frutto_3").setAttribute("cx", z + passi[key]);
+                    }
+                });
+                if (endOfInterval == 0) {
+                    clearInterval(interval_trasla);
+                    document.getElementById("disableAll").setAttribute("width", 0);
+                    document.getElementById("disableAll").setAttribute("heigth", 0);
+                }
+            }, 1);
+        }
+
+        // triggers
+        document.querySelectorAll('rect').forEach(function (key) {
+            key.addEventListener('click', () => {
+                if (key.getAttribute("id") != "disableAll") {
+                    alert("Ordino per tronchi: ETA'");
+                    trasla(1);
+                }
+            });
+        });
+        document.querySelectorAll('circle').forEach(function (key) {
+            if (key.getAttribute('r') > 30) key.addEventListener('click', () => {
+                alert("Ordino per chiome: REDDITO");
+                trasla(2);
+            });
+            else key.addEventListener('click', () => {
+                alert("Ordino per frutti: PRODUTTIVITA'");
+                trasla(3);
+            });
+        });
+        document.querySelectorAll('line').forEach(function (key) {
+            key.addEventListener('click', () => {
+                alert("Ordino per radici: FIGLI");
+                trasla(4);
+            });
+        });
+
+    </script>
+</body>
+</html>
