@@ -103,6 +103,8 @@
     <script>
         var destinazioni = {};
         var passi = {};
+        var dataSet;
+        var loaded = 0;
 
         // eta = tronchi
         // reddito = chiome
@@ -192,7 +194,12 @@
             }
         ];
 
-
+        //d3.json("/data.json").then(function (input) {
+        //    dataSet = input;
+        //    loaded = 1;
+        //}).catch(function (error) {
+        //    console.log("error");
+        //});
 
         var scale_centroid = d3.scaleLinear();
         scale_centroid.domain([1, dataSet.length]);
@@ -279,6 +286,8 @@
             circle3.setAttribute("cy", cy + r - r_frutto - 10);
             circle3.setAttribute("r", r_frutto);
         });
+
+
 
         function trasla(order) {
             // definizione origini

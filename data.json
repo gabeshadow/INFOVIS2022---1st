@@ -1,0 +1,82 @@
+[
+            {
+                "eta": 25,
+                "reddito": 1200,
+                "produttivita": 3,
+                "figli": 2,
+                "origine": 0,
+                "rif": "A"
+            },
+            {
+                "eta": 30,
+                "reddito": 1000,
+                "produttivita": 4,
+                "figli": 3,
+                "origine": 0,
+                "rif": "B"
+            },
+            {
+                "eta": 10,
+                "reddito": 0,
+                "produttivita": 0,
+                "figli": 0,
+                "origine": 0,
+                "rif": "C"
+            },
+            {
+                "eta": 90,
+                "reddito": 2000,
+                "produttivita": 0,
+                "figli": 2,
+                "origine": 0,
+                "rif": "D"
+            },
+            {
+                "eta": 50,
+                "reddito": 2200,
+                "produttivita": 1,
+                "figli": 1,
+                "origine": 0,
+                "rif": "E"
+            },
+            {
+                "eta": 30,
+                "reddito": 1700,
+                "produttivita": 3,
+                "figli": 0,
+                "origine": 0,
+                "rif": "F"
+            },
+            {
+                "eta": 45,
+                "reddito": 700,
+                "produttivita": 0,
+                "figli": 0,
+                "origine": 0,
+                "rif": "G"
+            },
+            {
+                "eta": 85,
+                "reddito": 200,
+                "produttivita": 0,
+                "figli": 4,
+                "origine": 0,
+                "rif": "H"
+            },
+            {
+                "eta": 18,
+                "reddito": 500,
+                "produttivita": 4,
+                "figli": 0,
+                "origine": 0,
+                "rif": "I"
+            },
+            {
+                "eta": 40,
+                "reddito": 3000,
+                "produttivita": 0,
+                "figli": 4,
+                "origine": 0,
+                "rif": "J"
+            }
+        ]
