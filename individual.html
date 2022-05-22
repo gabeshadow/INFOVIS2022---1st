@@ -3,7 +3,7 @@
     <title>INFOVIS Project</title>
     <meta content="teetat/html;charset=utf-8" http-equiv="Content-Tredditope">
     <meta content="utf-8" http-equiv="encoding">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="lib/d3.v6.min.js"></script>
 </head>
 <body>
     <h1>INFOVIS - PROGETTO INDIVIDUALE</h1>
@@ -105,191 +105,153 @@
         var passi = {};
         var dataSet;
         var loaded = 0;
-
+        var endOfInterval = 0;
         // eta = tronchi
         // reddito = chiome
         // figli = radici
         // produttivita = frutti
 
-        dataSet = [
-            {
-                "eta": 25,
-                "reddito": 1200,
-                "produttivita": 3,
-                "figli": 2,
-                "origine": 0,
-                "rif": "A"
-            },
-            {
-                "eta": 30,
-                "reddito": 1000,
-                "produttivita": 4,
-                "figli": 3,
-                "origine": 0,
-                "rif": "B"
-            },
-            {
-                "eta": 10,
-                "reddito": 0,
-                "produttivita": 0,
-                "figli": 0,
-                "origine": 0,
-                "rif": "C"
-            },
-            {
-                "eta": 90,
-                "reddito": 2000,
-                "produttivita": 0,
-                "figli": 2,
-                "origine": 0,
-                "rif": "D"
-            },
-            {
-                "eta": 50,
-                "reddito": 2200,
-                "produttivita": 1,
-                "figli": 1,
-                "origine": 0,
-                "rif": "E"
-            },
-            {
-                "eta": 30,
-                "reddito": 1700,
-                "produttivita": 3,
-                "figli": 0,
-                "origine": 0,
-                "rif": "F"
-            },
-            {
-                "eta": 45,
-                "reddito": 700,
-                "produttivita": 0,
-                "figli": 0,
-                "origine": 0,
-                "rif": "G"
-            },
-            {
-                "eta": 85,
-                "reddito": 200,
-                "produttivita": 0,
-                "figli": 4,
-                "origine": 0,
-                "rif": "H"
-            },
-            {
-                "eta": 18,
-                "reddito": 500,
-                "produttivita": 4,
-                "figli": 0,
-                "origine": 0,
-                "rif": "I"
-            },
-            {
-                "eta": 40,
-                "reddito": 3000,
-                "produttivita": 0,
-                "figli": 4,
-                "origine": 0,
-                "rif": "J"
-            }
-        ];
+        if (dataSet == undefined) {
 
-        //d3.json("/data.json").then(function (input) {
-        //    dataSet = input;
-        //    loaded = 1;
-        //}).catch(function (error) {
-        //    console.log("error");
-        //});
+            d3.json("data.json").then(function (input) {
 
-        var scale_centroid = d3.scaleLinear();
-        scale_centroid.domain([1, dataSet.length]);
-        scale_centroid.range([150, 150 + (200 * 9)]);
-        var scale_eta = d3.scaleLinear();
-        scale_eta.domain([d3.min(dataSet, d => d.eta), d3.max(dataSet, d => d.eta)]);
-        scale_eta.range([0.55, 1]);
-        var scale_reddito = d3.scaleLinear();
-        scale_reddito.domain([d3.min(dataSet, d => d.reddito), d3.max(dataSet, d => d.reddito)]);
-        scale_reddito.range([0.55, 1]);
-        var scale_figli = d3.scaleLinear();
-        scale_figli.domain([d3.min(dataSet, d => d.figli), d3.max(dataSet, d => d.figli)]); // 1 a 10, 0 a 0.45
-        scale_figli.range([0, 0.45]);
-        var scale_produttivita = d3.scaleLinear();
-        scale_produttivita.domain([d3.min(dataSet, d => d.produttivita), d3.max(dataSet, d => d.produttivita)]);
-        scale_produttivita.range([0.55, 1]);
-        // disegno radici
-        Object.keys(dataSet).forEach(function (key) {
-            var value_figli = dataSet[key].figli;
-            var line1 = document.getElementById(dataSet[key].rif + "_radice_1");
-            var line2 = document.getElementById(dataSet[key].rif + "_radice_2");
-            var line3 = document.getElementById(dataSet[key].rif + "_radice_3");
-            var y1 = 450;
-            var y2 = 500;
-            var x1 = key * 200 + 150;
-            var scale_radice = scale_figli(value_figli);
-            line1.setAttribute("x1", x1);
-            line1.setAttribute("y1", y1);
-            line1.setAttribute("x2", x1 - 50);
-            line1.setAttribute("y2", y2);
-            line1.setAttribute("stroke-width", Math.round(scale_radice * 8));
-            line2.setAttribute("x1", x1);
-            line2.setAttribute("y1", y1);
-            line2.setAttribute("x2", x1);
-            line2.setAttribute("y2", y2);
-            line2.setAttribute("stroke-width", Math.round(scale_radice * 8));
-            line3.setAttribute("x1", x1);
-            line3.setAttribute("y1", y1);
-            line3.setAttribute("x2", x1 + 50);
-            line3.setAttribute("y2", y2);
-            line3.setAttribute("stroke-width", Math.round(scale_radice * 8));
-        });
-        // disegno tronchi
-        Object.keys(dataSet).forEach(function (key) {
-            var value_eta = dataSet[key].eta;
-            var x = key * 200 + 140;
-            var rect = document.getElementById(dataSet[key].rif + "_tronco");
-            var scale_tronco = scale_eta(value_eta);
-            rect.setAttribute("x", x);
-            rect.setAttribute("y", Math.round(450 - (scale_tronco * 200)));
-            rect.setAttribute("width", 20);
-            rect.setAttribute("height", Math.round(scale_tronco * 200));
-        });
-        // disegno chiome
-        Object.keys(dataSet).forEach(function (key) {
-            var value_reddito = dataSet[key].reddito;
-            var circle = document.getElementById(dataSet[key].rif + "_chioma");
-            var scale_chioma = scale_reddito(value_reddito);
-            var cx = key * 200 + 150;
-            var altezza_tronco = document.getElementById(dataSet[key].rif + "_tronco");
-            circle.setAttribute("cx", cx);
-            circle.setAttribute("cy", altezza_tronco.getAttribute("y") - scale_chioma * 90);
-            circle.setAttribute("r", Math.ceil(scale_chioma * 90));
-        });
-        // disegno frutti
-        Object.keys(dataSet).forEach(function (key) {
-            var value_produttivita = dataSet[key].produttivita;
-            var circle1 = document.getElementById(dataSet[key].rif + "_frutto_1");
-            var circle2 = document.getElementById(dataSet[key].rif + "_frutto_2");
-            var circle3 = document.getElementById(dataSet[key].rif + "_frutto_3");
-            var chioma = document.getElementById(dataSet[key].rif + "_chioma");
-            var cx = parseInt(chioma.getAttribute("cx"));
-            var cy = parseInt(chioma.getAttribute("cy"));
-            var r = parseInt(chioma.getAttribute("r"));
-            var scale_frutto = scale_produttivita(value_produttivita);
-            var r_frutto = Math.ceil(scale_frutto * 30);
-            circle1.setAttribute("cx", Math.round(cx - r * (Math.sin(45)) + r_frutto * (Math.sin(45)) + 10));
-            circle1.setAttribute("cy", Math.round(cy - r * (Math.sin(45)) + r_frutto * (Math.sin(45)) + 10));
-            circle1.setAttribute("r", r_frutto);
-            circle2.setAttribute("cx", Math.round(cx + r * (Math.sin(45)) - r_frutto * (Math.sin(45)) - 10));
-            circle2.setAttribute("cy", Math.round(cy - r * (Math.sin(45)) + r_frutto * (Math.sin(45)) + 10));
-            circle2.setAttribute("r", r_frutto);
-            circle3.setAttribute("cx", cx);
-            circle3.setAttribute("cy", cy + r - r_frutto - 10);
-            circle3.setAttribute("r", r_frutto);
-        });
+                dataSet = input;
+
+                var scale_centroid = d3.scaleLinear();
+                scale_centroid.domain([1, dataSet.length]);
+                scale_centroid.range([150, 150 + (200 * 9)]);
+                var scale_eta = d3.scaleLinear();
+                scale_eta.domain([d3.min(dataSet, d => d.eta), d3.max(dataSet, d => d.eta)]);
+                scale_eta.range([0.55, 1]);
+                var scale_reddito = d3.scaleLinear();
+                scale_reddito.domain([d3.min(dataSet, d => d.reddito), d3.max(dataSet, d => d.reddito)]);
+                scale_reddito.range([0.55, 1]);
+                var scale_figli = d3.scaleLinear();
+                scale_figli.domain([d3.min(dataSet, d => d.figli), d3.max(dataSet, d => d.figli)]); // 1 a 10, 0 a 0.45
+                scale_figli.range([0, 0.45]);
+                var scale_produttivita = d3.scaleLinear();
+                scale_produttivita.domain([d3.min(dataSet, d => d.produttivita), d3.max(dataSet, d => d.produttivita)]);
+                scale_produttivita.range([0.55, 1]);
+                // disegno radici
+                Object.keys(dataSet).forEach(function (key) {
+                    var value_figli = dataSet[key].figli;
+                    var line1 = document.getElementById(dataSet[key].rif + "_radice_1");
+                    var line2 = document.getElementById(dataSet[key].rif + "_radice_2");
+                    var line3 = document.getElementById(dataSet[key].rif + "_radice_3");
+                    var y1 = 450;
+                    var y2 = 500;
+                    var x1 = key * 200 + 150;
+                    var scale_radice = scale_figli(value_figli);
+                    line1.setAttribute("x1", x1);
+                    line1.setAttribute("y1", y1);
+                    line1.setAttribute("x2", x1 - 50);
+                    line1.setAttribute("y2", y2);
+                    line1.setAttribute("stroke-width", Math.round(scale_radice * 8));
+                    line2.setAttribute("x1", x1);
+                    line2.setAttribute("y1", y1);
+                    line2.setAttribute("x2", x1);
+                    line2.setAttribute("y2", y2);
+                    line2.setAttribute("stroke-width", Math.round(scale_radice * 8));
+                    line3.setAttribute("x1", x1);
+                    line3.setAttribute("y1", y1);
+                    line3.setAttribute("x2", x1 + 50);
+                    line3.setAttribute("y2", y2);
+                    line3.setAttribute("stroke-width", Math.round(scale_radice * 8));
+                });
+                // disegno tronchi
+                Object.keys(dataSet).forEach(function (key) {
+                    var value_eta = dataSet[key].eta;
+                    var x = key * 200 + 140;
+                    var rect = document.getElementById(dataSet[key].rif + "_tronco");
+                    var scale_tronco = scale_eta(value_eta);
+                    rect.setAttribute("x", x);
+                    rect.setAttribute("y", Math.round(450 - (scale_tronco * 200)));
+                    rect.setAttribute("width", 20);
+                    rect.setAttribute("height", Math.round(scale_tronco * 200));
+                });
+                // disegno chiome
+                Object.keys(dataSet).forEach(function (key) {
+                    var value_reddito = dataSet[key].reddito;
+                    var circle = document.getElementById(dataSet[key].rif + "_chioma");
+                    var scale_chioma = scale_reddito(value_reddito);
+                    var cx = key * 200 + 150;
+                    var altezza_tronco = document.getElementById(dataSet[key].rif + "_tronco");
+                    circle.setAttribute("cx", cx);
+                    circle.setAttribute("cy", altezza_tronco.getAttribute("y") - scale_chioma * 90);
+                    circle.setAttribute("r", Math.ceil(scale_chioma * 90));
+                });
+                // disegno frutti
+                Object.keys(dataSet).forEach(function (key) {
+                    var value_produttivita = dataSet[key].produttivita;
+                    var circle1 = document.getElementById(dataSet[key].rif + "_frutto_1");
+                    var circle2 = document.getElementById(dataSet[key].rif + "_frutto_2");
+                    var circle3 = document.getElementById(dataSet[key].rif + "_frutto_3");
+                    var chioma = document.getElementById(dataSet[key].rif + "_chioma");
+                    var cx = parseInt(chioma.getAttribute("cx"));
+                    var cy = parseInt(chioma.getAttribute("cy"));
+                    var r = parseInt(chioma.getAttribute("r"));
+                    var scale_frutto = scale_produttivita(value_produttivita);
+                    var r_frutto = Math.ceil(scale_frutto * 30);
+                    circle1.setAttribute("cx", Math.round(cx - r * (Math.sin(45)) + r_frutto * (Math.sin(45)) + 10));
+                    circle1.setAttribute("cy", Math.round(cy - r * (Math.sin(45)) + r_frutto * (Math.sin(45)) + 10));
+                    circle1.setAttribute("r", r_frutto);
+                    circle2.setAttribute("cx", Math.round(cx + r * (Math.sin(45)) - r_frutto * (Math.sin(45)) - 10));
+                    circle2.setAttribute("cy", Math.round(cy - r * (Math.sin(45)) + r_frutto * (Math.sin(45)) + 10));
+                    circle2.setAttribute("r", r_frutto);
+                    circle3.setAttribute("cx", cx);
+                    circle3.setAttribute("cy", cy + r - r_frutto - 10);
+                    circle3.setAttribute("r", r_frutto);
+                });
 
 
+                // triggers
+                document.querySelectorAll('rect').forEach(function (key) {
+                    key.addEventListener('click', () => {
+                        if (key.getAttribute("id")) {
+                            if (endOfInterval == 0) {
+                                alert("Ordino per tronchi: ETA'");
+                                trasla(1);
+                            }
+                        }
+                    });
+                });
+                document.querySelectorAll('circle').forEach(function (key) {
+                    if (key.getAttribute('r') > 30)
+                        key.addEventListener('click', () => {
+                            if (endOfInterval == 0) {
+                                alert("Ordino per chiome: REDDITO");
+                                trasla(2);
+                            }
+                        });
+                    else
+                        key.addEventListener('click', () => {
+                            if (endOfInterval == 0) {
+                                alert("Ordino per frutti: PRODUTTIVITA'");
+                                trasla(3);
+                            }
+                        });
+                });
+                document.querySelectorAll('line').forEach(function (key) {
+                    key.addEventListener('click', () => {
+                        if (endOfInterval == 0) {
+                            alert("Ordino per radici: FIGLI");
+                            trasla(4);
+                        }
+                    });
+                });
+
+                console.log("loaded");
+
+            }).catch(function (error) {
+                console.log("error");
+            });
+
+        }
 
         function trasla(order) {
+            document.getElementById("disableAll").setAttribute("width", 2500);
+            document.getElementById("disableAll").setAttribute("heigth", 500);
+
             // definizione origini
             Object.keys(dataSet).forEach(function (key) {
                 dataSet[key].origine = key;
@@ -329,14 +291,12 @@
                 destinazioni[key] = arrivo_px;
             });
             var interval_trasla = setInterval(function () {
-                var endOfInterval = 0;
+                endOfInterval = 0;
                 Object.keys(dataSet).forEach(function (key) {
                     var albero = dataSet[key].rif;
                     var z = parseInt(document.getElementById(albero + "_radice_1").getAttribute("x1"));
                     if (z != destinazioni[key]) {
                         endOfInterval++;
-                        document.getElementById("disableAll").setAttribute("width", 2500);
-                        document.getElementById("disableAll").setAttribute("heigth", 500);
 
                         document.getElementById(albero + "_radice_1").setAttribute("x1", z + passi[key]);
                         document.getElementById(albero + "_radice_2").setAttribute("x1", z + passi[key]);
@@ -363,32 +323,6 @@
                 }
             }, 1);
         }
-
-        // triggers
-        document.querySelectorAll('rect').forEach(function (key) {
-            key.addEventListener('click', () => {
-                if (key.getAttribute("id") != "disableAll") {
-                    alert("Ordino per tronchi: ETA'");
-                    trasla(1);
-                }
-            });
-        });
-        document.querySelectorAll('circle').forEach(function (key) {
-            if (key.getAttribute('r') > 30) key.addEventListener('click', () => {
-                alert("Ordino per chiome: REDDITO");
-                trasla(2);
-            });
-            else key.addEventListener('click', () => {
-                alert("Ordino per frutti: PRODUTTIVITA'");
-                trasla(3);
-            });
-        });
-        document.querySelectorAll('line').forEach(function (key) {
-            key.addEventListener('click', () => {
-                alert("Ordino per radici: FIGLI");
-                trasla(4);
-            });
-        });
 
     </script>
 </body>
