@@ -7,4 +7,7 @@ Facendo click con il pulsante sinistro su una caratteristica di un albero, tutti
 in base alla variabile associata alla caratteristica cliccata. Fai in modo che i cambi di posizione degli alberi avvengano
  con un'animazione fluida. Usa le scale d3.js per mappare l'intervallo dei valori delle variabili (che è arbitrario) 
  sull'intervallo dei valori delle coordinate, che dipende dalla tua interfaccia.
+ 
 =======================================================
+
+Inserisci la sorgente JSON alla riga 116 secondo il tuo percorso locale.
